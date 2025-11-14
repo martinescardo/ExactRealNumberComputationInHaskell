@@ -79,7 +79,7 @@ Representation of the space `I=[-1,1]`:
 ```haskell
 type I  = [Digit]
 ```
-A sequence `ds = [d₀, d₁, ⋯, dₙ, ⋯]` represents the number
+An infinite sequence `ds = [d₀, d₁, ⋯, dₙ, ⋯]` represents the number
 ```text
     x = d₀ / 2 + d₁ / 4 + d₂ / 8 + ⋯ + dₙ / 2ⁿ⁺¹ + ⋯
 ```
@@ -129,7 +129,7 @@ Dependent types would be handy! Maybe the next version will be in
 Agda. (Added 14th November 2025. [Todd Ambridge](https://www.birmingham.ac.uk/staff/profiles/computer-science/academic-staff/ambridge-todd-waugh) did this in his [PhD Thesis](https://research.birmingham.ac.uk/en/publications/exact-real-search-formalised-optimisation-and-regression-in-const/).)
 
 The following converts back to our standard representation.  It
-amounts to division by `n` as a function `[-n,n] -> [-1,1]` for `n>=2`.
+amounts to division by `n` as a function `[-n,n] → [-1,1]` for `n>=2`.
 Dependent types again would be handy here. We use `n = 2` and `n = 4`.
 
 The first case of the following definition can be omitted. It is an
@@ -159,14 +159,14 @@ divideBy2 (a:b:x) =
 
 ## Some very basic operations on `I=[-1,1]`
 
-Addition as a function `[-1,1] × [-1,1] -> [-2,2]`. This is our first
+Addition as a function `[-1,1] × [-1,1] → [-2,2]`. This is our first
 example where we use an auxiliary representation:
 
 ```haskell
 add2 :: I -> I -> I2
 add2 = zipWith (+)
 ```
-Midpoint `(x+y)/2` as a function `[-1,1] × [-1,1] → [-1,1]:
+Midpoint `(x+y)/2` as a function `[-1,1] × [-1,1] → [-1,1]`:
 ```haskell
 mid :: I -> I -> I
 mid x y = divideBy2 (add2 x y)
@@ -229,7 +229,7 @@ Although `bigMid` cannot be defined using (*), it does satisfy (*).
 ## Truncated operations
 
 Some truncated operations are also useful. The truncation retraction
-truncate: `ℝ -> [-1,1]` is mathematically defined as:
+truncate: `ℝ → [-1,1]` is mathematically defined as:
 ```text
       truncate(x) = max(-1,min(x,1))
 
