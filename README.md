@@ -1241,7 +1241,7 @@ This is a kind of model-free [model checking](https://en.wikipedia.org/wiki/Mode
 
 ## General real numbers
 
-General real numbers can be represented by a mantissa in I and an
+General real numbers can be represented by a mantissa in `I` and an
 integer exponent:
 ```haskell
 type R = (I,Integer)
