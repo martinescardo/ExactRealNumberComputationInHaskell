@@ -544,7 +544,7 @@ it gives us computational (and indeed mathematical) trouble.
 
 Before writing Haskell code, let's see what happens in `C` with float and
 doubles:
-```text
+```c
   void main() {
     float const  a = 4.0;
     float const x0 = 0.671875;  float   xs = x0;
@@ -566,16 +566,18 @@ Maybe we can be confident that the correct result rounded to 2 digits
 would be $0.93$?
 
 Let's see. Make the program print intermediate results:
-```text
+```c
  void main() {
-  float const  a = 4.0;
-  float const x0 = 0.671875;  float   xs = x0;
-  float const  n = 60;        double  xd = x0;
+   float const  a = 4.0;
+   float const x0 = 0.671875;  float   xs = x0;
+   float const  n = 60;        double  xd = x0;
 
-  for (int i = 0; i <= n; i++) {
-    xs = a * xs * (1.0 - xs);
-    xd = a * xd * (1.0 - xd);
-    printf("%d \t %f \t %f \n", i, xs, xd);
+   for (int i = 0; i <= n; i++) {
+     xs = a * xs * (1.0 - xs);
+     xd = a * xd * (1.0 - xd);
+     printf("%d \t %f \t %f \n", i, xs, xd);
+   }
+ }
 ```
 We get:
 ```text
