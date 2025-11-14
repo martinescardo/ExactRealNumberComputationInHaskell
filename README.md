@@ -894,7 +894,7 @@ forEveryI' p = not(forSomeI'(not.p))
 
 ## Modulus of continuity
 
-Now the modulus of continuity. How many correct digits of the input
+We now discuss the modulus of continuity. How many correct digits of the input
 are needed to correctly compute the output with a given precision?
 The first algorithm for this is due to Berger (1990), and the following is a different version using the above function `forEveryI`:
 ```haskell
@@ -936,7 +936,7 @@ infimum f =
     else imin (infimum(f.((-1):))) (infimum(f.(1:)))
 ```
 But we need to define `imax` and `imin`. This has to be done so that their
-lookahead complexities are 1. Otherwise the algorithms diverge. See the next section.
+lookahead complexities are 1. Otherwise the above algorithms diverge. See the next section.
 ```haskell
 example12 = supremum (\x -> mid (0:x) (sqr x))
 ```
@@ -1013,7 +1013,7 @@ The sequence `y = znorm x` has the following properties:
      the sign of the denoted number by looking at the
      the first non-zero digit of y.
 ```
-We exploit the rewrite rules
+We exploit the following rewrite rules for consecutive digits of infinite sequences of digits,
 ```
   (-1)1 ↦ 0(-1)
   1(-1) ↦ 0( 1),
