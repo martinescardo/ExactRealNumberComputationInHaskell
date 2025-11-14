@@ -212,12 +212,12 @@ The definition
 ```text
   (*) bigMid (x:xs) = mid x (bigMid xs)
 ```
-doesn't work, because mid needs two digits of input from each argument
+doesn't work, because `mid` needs two digits of input from each argument
 to produce one digit of output, and hence (*) cannot produce any
 digit.
 
 We use Scriven's algorithm (in his 2008 MSc thesis ([MFPS'2009](http://dx.doi.org/10.1016/j.entcs.2008.10.020)) supervised by me).
-It uses the auxiliary representation I4 to compute
+It uses the auxiliary representation `I4` to compute
 `bigMid' :: [I] -> [I4]`, and then converts back to `I` by division by `4`:
 ```haskell
 bigMid :: [I] -> I
