@@ -525,7 +525,7 @@ sqr (a0 : a1 : x) = mid p q
        q  = (a0*a0) : (a1*a0) : (a1*a1) : sqr x
 ```
 
-## Wrong results very fast, and right result not so fast
+## Wrong results very fast, and right results not so fast
 
 A computation which is well-known to go wrong if care is not taken is
 the orbit of the [logistic map](https://en.wikipedia.org/wiki/Logistic_map)
