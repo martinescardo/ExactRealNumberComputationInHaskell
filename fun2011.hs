@@ -266,8 +266,7 @@ mcos x = bigMid (series one 1)
 marctan :: I -> I
 marctan x = bigMid (series x 1)
  where x2 = compl(sqr x)
-       series y n = zero : divByInt y n :
-                    series (mul x2 y) (n+2)
+       series y n = zero : divByInt y n : series (mul x2 y) (n+2)
 
 piDividedBy4 :: I
 piDividedBy4 = let inverse n = divByInt one n
@@ -298,7 +297,7 @@ mln x = mul x (mlni x)
 
 inv :: I -> I
 inv x = bigMid (series one)
-     where series y = y : series (mul x y)
+ where series y = y : series (mul x y)
 
 affine :: I -> I -> I -> I
 affine a b x = bigMid (map h x)

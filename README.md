@@ -715,13 +715,12 @@ mcos x = bigMid (series one 1)
 marctan :: I -> I
 marctan x = bigMid (series x 1)
  where x2 = compl(sqr x)
-       series y n = zero : divByInt y n :
-                    series (mul x2 y) (n+2)
+       series y n = zero : divByInt y n : series (mul x2 y) (n+2)
 ```
 
 ## Number π again
 
-Use [K.Takano 1982](https://en.wikipedia.org/wiki/Approximations_of_%CF%80):
+We use [K. Takano 1982](https://en.wikipedia.org/wiki/Approximations_of_%CF%80):
 ```text
    pi/4 = 12 arctan(1/49)
         + 32 arctan1/57)
@@ -778,7 +777,7 @@ The inverse function 1 / (2 - x) using power series:
 ```haskell
 inv :: I -> I
 inv x = bigMid (series one)
-     where series y = y : series (mul x y)
+ where series y = y : series (mul x y)
 ```
 
 ## Affine maps
@@ -797,7 +796,7 @@ That is, with
 ```text
     p = (b-a)/2,
     q = (b+a)/2.
-```text
+```
 Notice that
 ```text
     f(0) = (a+b)/2
