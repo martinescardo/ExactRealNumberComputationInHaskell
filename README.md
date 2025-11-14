@@ -1,6 +1,6 @@
 # Exact real number computation in Haskell
 
-By Martin Escardo, School of Computer Science, University of Birmingham, UK, 1998-2011.
+By Martín Escardó, School of Computer Science, University of Birmingham, UK, 1998-2011.
 
 Formatted to markdown 14th November 2025, with minor editions, from [the original](https://martinescardo.github.io/papers/fun2011.lhs) literate Haskell File for **Fun in the Afternoon 2011** held at the School of Computer Science, University of Birmingham, UK.
 
@@ -204,7 +204,7 @@ compute
            = mid(x₀, mid(x₁, mid(x₂, ⋯)))
            = bigMid x
 ```
-This infinitary operation is proposed by Escardo and Simpson
+This infinitary operation is proposed by Escardó and Simpson
 (LICS'2001, [A universal characterization of the closed Euclidean
 interval](https://martinescardo.github.io/papers/interval.pdf)).
 
@@ -216,7 +216,7 @@ doesn't work, because mid needs two digits of input from each argument
 to produce one digit of output, and hence (*) cannot produce any
 digit.
 
-We use Scriven's algorithm (in his 2008 MSc thesis ([MFPS'2009](http://dx.doi.org/10.1016/j.entcs.2008.10.020))).
+We use Scriven's algorithm (in his 2008 MSc thesis ([MFPS'2009](http://dx.doi.org/10.1016/j.entcs.2008.10.020)) supervised by me).
 It uses the auxiliary representation I4 to compute
 `bigMid' :: [I] -> [I4]`, and then converts back to `I` by division by `4`:
 ```haskell
@@ -820,7 +820,7 @@ and even more generally
     f(Mᵢ xᵢ) = Mᵢ f(xᵢ).
 ```
 That is, f is a (big) midpoint homomorphism.
-See [Escardo and Simpson (2001)](https://martinescardo.github.io/papers/interval.pdf).
+See [Escardó and Simpson (2001)](https://martinescardo.github.io/papers/interval.pdf).
 ```haskell
 affine :: I -> I -> I -> I
 affine a b x = bigMid(map h x)
