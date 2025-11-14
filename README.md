@@ -457,7 +457,7 @@ I don't have the time, at the time of writing, to fully explain why this is not 
 computations by hand in the case of finitely many digits, thanks to the `bigMid` operation).
 At this point I want to save time and refer you to the beautiful [work](http://www.dcs.ed.ac.uk/home/mhe/plume/index.html)
 by David Plume at Edinburgh, supervised by Alex Simpson and myself in
-1997: He was an undergrad student at that time!
+1997 (he was an undergrad student at that time!).
 
 Here is Plume's multiplication algorithm (at that time `mul_version0` was
 not known as far as I am aware):
