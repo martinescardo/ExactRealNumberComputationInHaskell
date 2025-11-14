@@ -229,7 +229,7 @@ Although `bigMid` cannot be defined using `(*)`, it does satisfy `(*)`.
 ## Truncated operations
 
 Some truncated operations are also useful. The truncation retraction
-truncate: `ℝ → [-1,1]` is mathematically defined as:
+`truncate: ℝ → [-1,1]` is mathematically defined as:
 ```text
       truncate(x) = max(-1,min(x,1))
 
