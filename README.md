@@ -556,6 +556,7 @@ doubles:
     }
 
     printf("xs = %f     xd = %f \n", xs, xd);
+  }
 ```
 We get:
 ```text
