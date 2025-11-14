@@ -1,13 +1,23 @@
-# Real number computation in Haskell with real numbers represented as infinite sequences of digits
+# Real number computation in Haskell
 
 By Martin Escardo, School of Computer Science, University of Birmingham, UK, 1998-2011.
 
 Formatted to markdown 14th November 2025, with minor editions, from [the original](https://martinescardo.github.io/papers/fun2011.lhs) literate Haskell File for **Fun in the Afternoon 2011** held at the School of Computer Science, University of Birmingham, UK.
 
-## Running examples
+The file [fun2011.hs], which contains the Haskell code below without comments, should not be edited directly. Instead edit [this](README.md) file and run
+```text
+ $ unhaskell mdtohs.hs < README.md > fun2011.hs
+```
+to update it.
+
+## About
+
+Exact computation with real numbers represented as infinite sequences of signed binary digits digits. Some references are given as clickable links.
+
+## Running the examples
 
 There are several examples to choose from (search the file for the
-keyword "example"):
+keyword `example`):
 
 ```haskell
 {-# LANGUAGE NPlusKPatterns #-}
@@ -18,6 +28,14 @@ import System.IO
 main = do
         hSetBuffering stdout NoBuffering
         putStr ((show (take 500 example4)) ++ "\n")
+```
+You may wish to compile the file with
+```text
+ $ ghc --make -O2 fun2011.hs
+```
+and then run
+```text
+ $ ./fun2011
 ```
 
 ## Decimal notation is problematic
