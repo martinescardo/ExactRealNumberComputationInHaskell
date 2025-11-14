@@ -772,7 +772,7 @@ mln x = mul x (mlni x)
 
 ## Division
 
-The inverse function 1 / (2 - x) using power series:
+The inverse function `1 / (2 - x)` using power series:
 
 ```haskell
 inv :: I -> I
