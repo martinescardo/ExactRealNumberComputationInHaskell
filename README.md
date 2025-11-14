@@ -836,7 +836,7 @@ idAffine = affine minusOne one
 
 ## Quantification over the unit interval
 
-This is essentially Berger's 1990 algorithm. (See [Seemingly impossible functional programs](https://math.andrej.com/2007/09/28/seemingly-impossible-functional-programs/) and/or page 15, Remark 4.8 of [this paper](https://lmcs.episciences.org/693/pdf).) We exploit that every
+This is essentially Berger's 1990 algorithm in his PhD thesis. (See also [Seemingly impossible functional programs](https://math.andrej.com/2007/09/28/seemingly-impossible-functional-programs/) and/or page 15, Remark 4.8 of [this paper](https://lmcs.episciences.org/693/pdf).) We exploit that every
 number in `I=[-1,1]` can be represented using digits `-1` and `1`
 only. Hence we only check such sequences of digits.
 ```haskell
@@ -873,7 +873,7 @@ forEveryI' p = not(forSomeI'(not.p))
 
 Now the modulus of continuity. How many correct digits of the input
 are needed to correctly compute the output with a given precision?
-This algorithm is due to Berger (1990).
+The first algorithm for this is due to Berger (1990), and the following is a different version using the above function `forEveryI`:
 ```haskell
 modulus :: (I -> I) -> (Int -> Int)
 modulus f 0 = 0
