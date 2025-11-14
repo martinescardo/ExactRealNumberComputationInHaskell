@@ -359,7 +359,7 @@ completely wrong.
 
 ## Multiplication by an integer
 
-We multiply a number in `[-1,1]` by positive integer, producing integer
+We multiply a number in `[-1,1]` by a positive integer, producing integer
 and fractional parts. In particular we will be able to multiply by `10`,
 and hence convert to decimal (with a caveat - see below).
 ```haskell
