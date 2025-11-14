@@ -912,8 +912,8 @@ infimum f =
     then h : infimum(tail.f)
     else imin (infimum(f.((-1):))) (infimum(f.(1:)))
 ```
-But we need to define imax and imin. This has to be done so that their
-lookahead complexities are 1. Otherwise the algorithms diverge.
+But we need to define `imax` and `imin`. This has to be done so that their
+lookahead complexities are 1. Otherwise the algorithms diverge. See the next section.
 ```haskell
 example12 = supremum (\x -> mid (0:x) (sqr x))
 ```
@@ -971,8 +971,9 @@ halfIntegral :: (I -> I) -> I
 halfIntegral f = bigMid (halfIntegral' f)
 ```
 Let's integrate the absolute value function:
-
+```haskell
 example10 = halfIntegral iabs
+```
 
 ## Zero normalization
 
