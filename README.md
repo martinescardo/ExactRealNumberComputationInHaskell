@@ -383,8 +383,7 @@ form `m/10ⁿ` with `m` and `n` integers (`10`-adic numbers). This is the best
 that can be done without violating continuity, and hence
 computability, requirements.
 
-We consider conversion using negative decimal digits first. The
-alphabet of positive and negative (and zero) decimal digits is:
+We consider conversion using negative decimal digits first. The of sequences of positive and negative (and zero) decimal digits is:
 ```haskell
 type Decimal = [Int]
 ```
