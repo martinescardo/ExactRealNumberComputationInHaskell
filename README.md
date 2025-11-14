@@ -1073,8 +1073,8 @@ squareRoot = inverse sqr
 
 example6 = toDouble(squareRoot half)
 ```
-Perhaps counter-intuitively, the closer we get the root, the algorithm
-takes longer to produce the next digit. A related example is this:
+Perhaps counter-intuitively, the closer we get the root,
+longer the algorithm takes to produce the next digit. A related example is this:
 ```haskell
 example7 = trisection f
  where tiny n = if n == 0 then one else 0 : tiny(n-1)
