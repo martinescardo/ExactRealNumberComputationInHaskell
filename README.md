@@ -689,7 +689,7 @@ functions, we can apply the usual Taylor series from calculus.
 mexp :: I -> I
 mexp x = bigMid(series one 1)
     where series y n = y : series (divByInt (mul x y) n) (n+1)
-```haskell
+```
 
 ## Trigonometric function `1/2 sin(x/2)`
 
