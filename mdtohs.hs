@@ -1,6 +1,6 @@
 {-
 
-This Haskell program converts an md file to an hs by removing
+This Haskell program converts an md file to an hs file by removing
 everything that is not Haskell code.
 
   * Lines between "```haskell" and "```" are copied.
@@ -8,6 +8,10 @@ everything that is not Haskell code.
   * However, lines between "```hs" and "```" are not copied,
     deliberately. This is to be able to control what to copy or not,
     while still retaining syntax highlighting in both cases.
+
+This works as a unix pipe. So use it e.g. as follows:
+
+ $ runhaskell mdtohs < input-file > output-file
 
 -}
 
