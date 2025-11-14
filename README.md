@@ -1096,7 +1096,7 @@ trisection01 :: (I -> I) -> I
 trisection01 f = 1 : trisection(f.(1:))
 ```
 In fact, this is what is used in the above recursive definition of
-trisection!
+`trisection`!
 
 ## Definition by cases
 
@@ -1152,8 +1152,7 @@ We have that
 ```
 Actually the last equation doesn't need the last arguments to be
 equal: it is enough they represent the same number, and the result
-will be (a third) representation of that number. Sorry for being
-sloppy.
+will be (a third) representation of that number.
 
 I called this the "pseudo-parallel conditional" in [a 1998 publication](https://www.sciencedirect.com/science/article/pii/S1571066105802142).
 
