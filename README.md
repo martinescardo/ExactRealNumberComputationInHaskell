@@ -312,7 +312,7 @@ We have Haskell functions
 
 Using [Bailey, Borwein & Plouffe 1997](https://www.davidhbailey.com/dhbpapers/digits.pdf), we get:
 ```text
-  π/8 = bigMid_k 8⁻ᵏ (1/(8k+1) - 1/2(8k+4) - 1/4(8k+5) - 1/4(8k+6))
+  π/8 = bigMidₖ 8⁻ᵏ (1/(8k+1) - 1/2(8k+4) - 1/4(8k+5) - 1/4(8k+6)).
 ```
 See also [Wikipedia](http://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula).
 ```haskell
@@ -332,11 +332,11 @@ This is an unusual example of a situation of when things go rather
 well regarding the trade-off elegance-versus-efficiency. Of course,
 there are much better ways of computing π. But this is not the worst.
 
-## Conversion from and to Double
+## Conversion from and to `Double`
 
 We now want to print the results in human-readable form. The easiest
-kind of conversion is to/from Double. This can be done without
-round-off errors, but of course the conversion to Double will involve
+kind of conversion is to/from `Double`. This can be done without
+round-off errors, but of course the conversion to `Double` will involve
 a truncation error.
 ```haskell
 toDouble :: I -> Double
@@ -352,11 +352,11 @@ fromDouble = f 55
        f k x   = if x  < 0.0 then -1 : f (k-1) (2.0 * x + 1)
                              else  1 : f (k-1) (2.0 * x - 1)
 
-example2 = (toDouble piDividedBy32) * 32
+example2 = 32 * toDouble piDividedBy32
 example3 = example2 - pi
 ```
 The last example gives `0.0`, which confirms that Haskell correctly
-computes π in Double. Or that our algorithms so far are not
+computes π in `Double`. Or that our algorithms so far are not
 completely wrong.
 
 ## Multiplication by an integer
@@ -392,9 +392,9 @@ type Decimal = [Int]
 ```
 The conversion allowing negative decimal digits is defined by:
 ```haskell
-signedDecimal :: I -> Decimal
-signedDecimal x = let (d,y) = mulByInt x 10
-                  in d : signedDecimal y
+signed2Decimal :: I -> Decimal
+signed2Decimal x = let (d,y) = mulByInt x 10
+                   in d : signed2Decimal y
 ```
 We now get rid of negative decimal digits. Only works for positive,
 non-10-adic numbers, as discussed above. We use a finite state machine
@@ -421,7 +421,7 @@ We now convert a positive, non 10-adic, number to decimal
 notation using only non-negative digits:
 ```haskell
 decimal :: I -> Decimal
-decimal = normalize.signedDecimal
+decimal = normalize.signed2Decimal
 
 decimalString :: I -> String
 decimalString = concat.(map show).decimal

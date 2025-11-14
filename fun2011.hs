@@ -125,7 +125,7 @@ fromDouble = f 55
        f k x   = if x  < 0.0 then -1 : f (k-1) (2.0 * x + 1)
                              else  1 : f (k-1) (2.0 * x - 1)
 
-example2 = (toDouble piDividedBy32) * 32
+example2 = 32 * toDouble piDividedBy32
 example3 = example2 - pi
 
 mulByInt :: I -> Int -> (Int,I)
@@ -141,9 +141,9 @@ mulByInt x n = f n
 
 type Decimal = [Int]
 
-signedDecimal :: I -> Decimal
-signedDecimal x = let (d,y) = mulByInt x 10
-                  in d : signedDecimal y
+signed2Decimal :: I -> Decimal
+signed2Decimal x = let (d,y) = mulByInt x 10
+                   in d : signed2Decimal y
 
 normalize :: Decimal -> Decimal
 normalize x = f x
@@ -162,7 +162,7 @@ normalize x = f x
                       else wpositive x
 
 decimal :: I -> Decimal
-decimal = normalize.signedDecimal
+decimal = normalize.signed2Decimal
 
 decimalString :: I -> String
 decimalString = concat.(map show).decimal
