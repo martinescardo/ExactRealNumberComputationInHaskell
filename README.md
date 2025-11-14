@@ -677,9 +677,9 @@ Now define
 We calculate
 ```text
     g(x) = 1/2 sumₙ aₙ xⁿ 1/2ⁿ
-         = sumₙ aₙ xⁿ 1/2ⁿ⁻¹
+         = Σₙ aₙ xⁿ 1/2ⁿ⁻¹
          = Mₙ aₙ xₙ.
-```text
+```
 Hence we can compute `g` using `bigMid`. To compute the elementary
 functions, we can apply the usual Taylor series from calculus.
 
