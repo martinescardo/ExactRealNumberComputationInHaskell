@@ -711,7 +711,7 @@ mcos x = bigMid (series one 1)
        series y n = y : zero : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 ```
 
-## Function `1/2 arctan(x/2)`
+## Trigonometric function `1/2 arctan(x/2)`
 
 ```haskell
 marctan :: I -> I
