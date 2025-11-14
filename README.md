@@ -234,9 +234,9 @@ Some truncated operations are also useful. The truncation retraction
       truncate(x) = max(-1,min(x,1))
 
                      /
-                     |    -1 if x <= -1,
-                  = <      x if      -1 <= x <= 1,
-                     |     1 if                 1 <= x.
+                     |    -1 if x ≤ -1,
+                  = <      x if     -1 ≤ x ≤ 1,
+                     |     1 if              1 ≤ x.
                      \
 
 ```
@@ -354,7 +354,7 @@ example2 = 32 * toDouble piDividedBy32
 example3 = example2 - pi
 ```
 The last example gives `0.0`, which confirms that Haskell correctly
-computes π in `Double`. Or that our algorithms so far are not
+computes π in `Double` with its definition `pi` in the [standard prelude](https://www.haskell.org/onlinereport/standard-prelude.html). Or that our algorithms so far are not
 completely wrong.
 
 ## Multiplication by an integer
