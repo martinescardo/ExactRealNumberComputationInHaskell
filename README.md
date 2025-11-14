@@ -12,7 +12,7 @@ to update it.
 
 ## About
 
-Exact computation with real numbers represented as infinite sequences of signed binary digits digits. Some references are given as clickable links.
+Exact computation with real numbers represented as infinite sequences of signed binary digits. Some references are given as clickable links.
 
 ## Running the examples
 
