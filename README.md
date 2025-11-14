@@ -290,7 +290,7 @@ tadd x y = mulBy2(mid x y)
 
 ## Summary so far
 
-We have
+We have Haskell functions
 ```text
    one, zero, minusOne, half, minusHalf :: I
    divideBy :: Int -> In -> I
@@ -299,12 +299,10 @@ We have
    bigMid :: [I] -> I
    compl :: I -> I
    divByInt :: I -> Int -> I
-```
-with truncated operations
-```text
    addOne :: I -> I
    subOne :: I -> I
    oneMinus :: I -> I
+   tadd :: I -> I -> I
    mulBy2 :: I -> I
    mulBy4 :: I -> I
    tMulByInt :: I -> Int -> I
@@ -315,7 +313,7 @@ with truncated operations
 Using [Bailey, Borwein & Plouffe 1997](https://www.davidhbailey.com/dhbpapers/digits.pdf), we get:
 ```text
   π/8 = bigMid_k 8⁻ᵏ (1/(8k+1) - 1/2(8k+4) - 1/4(8k+5) - 1/4(8k+6))
-```text
+```
 See also [Wikipedia](http://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula).
 ```haskell
 piDividedBy32 :: I
