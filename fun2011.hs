@@ -155,17 +155,15 @@ normalize x = f x
                 then (10+d) : f x
                 else (10+d-1) : g x
        wpositive (d:x) =
-                if d > 0
-                 then True
-                 else if d < 0
-                      then False
-                      else wpositive x
+                if d > 0 then True
+           else if d < 0 then False
+                         else wpositive x
 
 decimal :: I -> Decimal
 decimal = normalize.signed2Decimal
 
 decimalString :: I -> String
-decimalString = concat.(map show).decimal
+decimalString = concat . map show . decimal
 
 example4 = let (m,x) = mulByInt piDividedBy32 32
            in show m ++ "." ++ decimalString x

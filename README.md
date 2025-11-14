@@ -411,11 +411,9 @@ normalize x = f x
                 then (10+d) : f x
                 else (10+d-1) : g x
        wpositive (d:x) =
-                if d > 0
-                 then True
-                 else if d < 0
-                      then False
-                      else wpositive x
+                if d > 0 then True
+           else if d < 0 then False
+                         else wpositive x
 ```
 We now convert a positive, non 10-adic, number to decimal
 notation using only non-negative digits:
@@ -424,7 +422,7 @@ decimal :: I -> Decimal
 decimal = normalize.signed2Decimal
 
 decimalString :: I -> String
-decimalString = concat.(map show).decimal
+decimalString = concat . map show . decimal
 ```
 The decimal expansion of π can be computed as follows:
 ```haskell
@@ -459,8 +457,7 @@ mul_version0 :: I -> I -> I
 mul_version0 x y = bigMid (zipWith digitMul x (repeat y))
 ```
 I don't have the time, at the time of writing, to fully explain why this is not as efficient as it can be. But it is pleasant that we can get an easy, self-explanatory algorithm (which works in the same way as we do
-computations by hand in the case of finitely many digits, thanks to the bigMid operation).
-
+computations by hand in the case of finitely many digits, thanks to the `bigMid` operation).
 At this point I want to save time and refer you to the beautiful [work](http://www.dcs.ed.ac.uk/home/mhe/plume/index.html)
 by David Plume at Edinburgh, supervised by Alex Simpson and myself in
 1997: He was an undergrad student at that time!
@@ -481,7 +478,6 @@ way-faster algorithm, which arises by (1) adding particular cases
 algorithm and making mathematical simplifications:
 ```haskell
 mul_version2 :: I -> I -> I
-
 mul_version2 (0:x) y = 0 : mul_version2 x y
 mul_version2 x (0:y) = 0 : mul_version2 x y
 mul_version2 (a0 : 0 : x) (b0 : 0 : y) = mid p q
@@ -514,7 +510,7 @@ efficient multiplication in the infinite case (in practice, or in
 theory).
 
 The previous algorithm can be further simplified when we want to
-compute (mul x x), that is, squares, and this gives a further speed
+compute `mul x x`, that is, squares, and this gives a further speed
 up.
 ```haskell
 sqr :: I -> I
@@ -526,13 +522,13 @@ sqr (a0 : a1 : x) = mid p q
  where p  = mid p' p''
        p' = (a0*a1): digitMul a1 x
        p''= digitMul a0 x
-       q = (a0*a0) : (a1*a0) : (a1*a1) : sqr x
+       q  = (a0*a0) : (a1*a0) : (a1*a1) : sqr x
 ```
 
 ## Wrong results very fast, and right result not so fast
 
 A computation which is well-known to go wrong if care is not taken is
-the orbit of the logistic map
+the orbit of the [logistic map](https://en.wikipedia.org/wiki/Logistic_map)
 ```text
    f(x) = ax(1-x).
 ```
