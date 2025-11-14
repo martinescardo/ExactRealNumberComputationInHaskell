@@ -203,7 +203,7 @@ compute
            = Σₙ xₙ / 2ⁿ⁻¹
            = mid(x₀, mid(x₁, mid(x₂, ⋯)))
            = bigMid x
-``
+```
 This infinitary operation is proposed by Escardo and Simpson
 (LICS'2001, [A universal characterization of the closed Euclidean
 interval](https://martinescardo.github.io/papers/interval.pdf)).
