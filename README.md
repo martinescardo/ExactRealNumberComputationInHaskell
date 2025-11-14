@@ -115,7 +115,7 @@ Type of digits `-4,-3,-2,-1,0,1,2,3,4`:
 ```haskell
 type Digit4  = Int
 ```
-More generally, type of digits `|d|<=n`.
+More generally, the type of digits `|d|<=n`:
 ```haskell
 type Digitn = Int
 ```
@@ -137,7 +137,7 @@ optimization that makes a significant difference, by reducing the
 lookahead complexity.
 ```haskell
 divideBy :: Int -> In -> I
-divideBy n (0:x) = 0 : divideBy n x -- Added 5 Feb 2015. Makes everything way faster, but is not needed.
+divideBy n (0:x) = 0 : divideBy n x -- Added 5 Feb 2015. Makes everything way faster.
 divideBy n (a:x) | abs a == n
   = (if a < 0 then -1 else 1) : divideBy n x
 divideBy n (a:b:x) =
@@ -204,7 +204,7 @@ compute
            = mid(x₀, mid(x₁, mid(x₂, ⋯)))
            = bigMid x
 ```
-This infinitary operation is proposed by Escardó and Simpson
+This infinitary operation `M`, called `bigMid` in our Haskell implementation, is proposed by Escardó and Simpson
 (LICS'2001, [A universal characterization of the closed Euclidean
 interval](https://martinescardo.github.io/papers/interval.pdf)).
 
