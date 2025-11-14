@@ -218,7 +218,7 @@ digit.
 
 We use Scriven's algorithm (in his 2008 MSc thesis ([MFPS'2009](http://dx.doi.org/10.1016/j.entcs.2008.10.020)) supervised by me).
 It uses the auxiliary representation `I4` to compute
-`bigMid' :: [I] -> [I4]`, and then converts back to `I` by division by `4`:
+`bigMid' :: [I] -> I4`, and then converts back to `I` by division by `4`:
 ```haskell
 bigMid :: [I] -> I
 bigMid = divideBy 4 . bigMid'
