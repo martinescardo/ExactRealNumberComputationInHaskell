@@ -188,10 +188,10 @@ Division by a positive integer:
 divByInt :: I -> Int -> I
 divByInt x n = f x 0
   where
-   f (a:x) s = let t = a + 2 * s
-               in if t >=  n then  1 : f x (t - n)
-             else if t <= -n then -1 : f x (t + n)
-                             else  0 : f x t
+    f (a:x) s = let t = a + 2 * s
+                in if t >=  n then  1 : f x (t - n)
+              else if t <= -n then -1 : f x (t + n)
+                              else  0 : f x t
 ```
 
 ## Infinitary operations
@@ -318,11 +318,12 @@ See also [Wikipedia](http://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%9
 ```haskell
 piDividedBy32 :: I
 piDividedBy32 = bigMid [f k (mid (mid (g1 k) (g2 k))(mid (g3 k) (g4 k))) | k <- [0..]]
- where f k x = if k == 0 then x else 0:0:0: f (k-1) x
-       g1 k = divByInt (repeat  1)      (8*k+1)
-       g2 k = divByInt (-1 : zero)      (8*k+4)
-       g3 k = divByInt ( 0 : -1 : zero) (8*k+5)
-       g4 k = divByInt ( 0 : -1 : zero) (8*k+6)
+ where
+   f k x = if k == 0 then x else 0:0:0: f (k-1) x
+   g1 k = divByInt (repeat  1)      (8*k+1)
+   g2 k = divByInt (-1 : zero)      (8*k+4)
+   g3 k = divByInt ( 0 : -1 : zero) (8*k+5)
+   g4 k = divByInt ( 0 : -1 : zero) (8*k+6)
 
 example1 = piDividedBy32
 ```
@@ -339,16 +340,18 @@ a truncation error.
 ```haskell
 toDouble :: I -> Double
 toDouble = f 55
- where f 0 x = 0.0
-       f k (-1 : x) = (-1.0 + f (k-1) x)/2.0
-       f k ( 0 : x) = (       f (k-1) x)/2.0
-       f k ( 1 : x) = ( 1.0 + f (k-1) x)/2.0
+  where
+    f 0 x = 0.0
+    f k (-1 : x) = (-1.0 + f (k-1) x)/2.0
+    f k ( 0 : x) = (       f (k-1) x)/2.0
+    f k ( 1 : x) = ( 1.0 + f (k-1) x)/2.0
 
 fromDouble :: Double -> I
 fromDouble = f 55
- where f 0 x   = zero
-       f k x   = if x  < 0.0 then -1 : f (k-1) (2.0 * x + 1)
-                             else  1 : f (k-1) (2.0 * x - 1)
+  where
+    f 0 x   = zero
+    f k x   = if x  < 0.0 then -1 : f (k-1) (2.0 * x + 1)
+                          else  1 : f (k-1) (2.0 * x - 1)
 
 example2 = 32 * toDouble piDividedBy32
 example3 = example2 - pi
@@ -365,14 +368,15 @@ and hence convert to decimal (with a caveat - see below).
 ```haskell
 mulByInt :: I -> Int -> (Int,I)
 mulByInt x n = f n
- where f 1 = (0, x)
-       f n = let (a,u) = f (n `div` 2)
-                 d:y = u
-                 b = 2*a+d
-             in if even n
-                then (b,y)
-                else let e:t = (mid x y)
-                     in (b+e,t)
+  where
+    f 1 = (0, x)
+    f n = let (a,u) = f (n `div` 2)
+            d:y = u
+            b = 2*a+d
+        in if even n
+           then (b,y)
+           else let e:t = (mid x y)
+                in (b+e,t)
 ```
 
 ## Conversion to decimal
@@ -400,17 +404,18 @@ auxiliary function:
 ```haskell
 normalize :: Decimal -> Decimal
 normalize x = f x
- where f(d:x) = if wpositive x
-                then d:f x
-                else (d-1): g x
-       g(0:x) = 9: g(x)
-       g(d:x) = if wpositive x
-                then (10+d) : f x
-                else (10+d-1) : g x
-       wpositive (d:x) =
-                if d > 0 then True
-           else if d < 0 then False
-                         else wpositive x
+  where
+    f(d:x) = if wpositive x
+             then d:f x
+             else (d-1): g x
+    g(0:x) = 9: g(x)
+    g(d:x) = if wpositive x
+             then (10+d) : f x
+             else (10+d-1) : g x
+    wpositive (d:x) =
+             if d > 0 then True
+        else if d < 0 then False
+                      else wpositive x
 ```
 We now convert a positive, non 10-adic, number to decimal
 notation using only non-negative digits:
@@ -464,10 +469,11 @@ not known as far as I am aware):
 ```haskell
 mul_version1 :: I -> I -> I
 mul_version1 (a0 : a1 : x) (b0 : b1 : y) = mid p q
- where p  = mid p' p''
-       p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
-       p''= mid (digitMul b0 x) (digitMul a0 y)
-       q = (a0*b0) : (a1*b0) : (a1*b1) : mul_version1 x y
+  where
+    p  = mid p' p''
+    p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : (a1*b0) : (a1*b1) : mul_version1 x y
 ```
 Soon after that (still last millenium), I came up with the following
 way-faster algorithm, which arises by (1) adding particular cases
@@ -478,28 +484,33 @@ mul_version2 :: I -> I -> I
 mul_version2 (0:x) y = 0 : mul_version2 x y
 mul_version2 x (0:y) = 0 : mul_version2 x y
 mul_version2 (a0 : 0 : x) (b0 : 0 : y) = mid p q
-  where p  = 0 : mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : 0 : 0 : mul_version2 x y
+  where
+    p  = 0 : mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : 0 : 0 : mul_version2 x y
 mul_version2 (a0 : 0 : x) (b0 : 1 : y) = mid p q
-  where p  = mid p' p''
-        p' = 0 : 0 : x
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : 0 : 0 : mul_version2 x y
+  where
+   p  = mid p' p''
+   p' = 0 : 0 : x
+   p''= mid (digitMul b0 x) (digitMul a0 y)
+   q = (a0*b0) : 0 : 0 : mul_version2 x y
 mul_version2 (a0 : 0 : x) (b0 : b1 : y) = mid p q
-  where p  = mid p' p''
-        p' = (a0*b1): 0 : digitMul b1 x
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : 0 : 0 : mul_version2 x y
+  where
+    p  = mid p' p''
+    p' = (a0*b1): 0 : digitMul b1 x
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : 0 : 0 : mul_version2 x y
 mul_version2 (a0 : a1 : x) (b0 : 0 : y) = mid p q
-  where p  = mid p' p''
-        p' = 0 : 0 : digitMul a1 y
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : (a1*b0) : 0 : mul_version2 x y
+  where
+    p  = mid p' p''
+    p' = 0 : 0 : digitMul a1 y
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : (a1*b0) : 0 : mul_version2 x y
 mul_version2 (a0 : a1 : x) (b0 : b1 : y) = mid p q
-  where p  = mid p' p''
-        p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : (a1*b0) : (a1*b1) : mul_version2 x y
+  where
+    p  = mid p' p''
+    p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : (a1*b0) : (a1*b1) : mul_version2 x y
 ```
 This is not beautiful at this point, but it is the price you have to
 pay to be fast. I don't think the last word has been said about
@@ -513,13 +524,15 @@ up.
 sqr :: I -> I
 sqr (0:x) = 0 : 0 : sqr x
 sqr (a0 : 0 : x) = mid p q
- where p  = 0 : digitMul a0 x
-       q = (a0*a0) : 0 : 0 : sqr x
+  where
+   p  = 0 : digitMul a0 x
+   q = (a0*a0) : 0 : 0 : sqr x
 sqr (a0 : a1 : x) = mid p q
- where p  = mid p' p''
-       p' = (a0*a1): digitMul a1 x
-       p''= digitMul a0 x
-       q  = (a0*a0) : (a1*a0) : (a1*a1) : sqr x
+  where
+    p  = mid p' p''
+    p' = (a0*a1): digitMul a1 x
+    p''= digitMul a0 x
+    q  = (a0*a0) : (a1*a0) : (a1*a1) : sqr x
 ```
 
 ## Wrong results very fast, and right results not so fast
@@ -580,7 +593,7 @@ Let's see. Make the program print intermediate results:
 ```
 We get:
 ```text
- i    xs            xd
+ i    x float       x double
 -----------------------------
  0    0.671875      0.671875
  5    0.384327      0.384327
@@ -600,7 +613,7 @@ We now use a different, equivalent formula:
 ```text
    f(x) = 4x(1-x) = 1-(2x-1)²
 
- n    exact       double 1    double 2
+ i    exact       Double 1    Double 2
 ----------------------------------------
  0    0.671875    0.671875    0.671875
  5    0.384327    0.384327    0.384327
@@ -637,10 +650,11 @@ logistic  x = mulBy4 (mul x (oneMinus x))
 ```
 The following is more efficient (faster) when it is iterated:
 ```haskell
-logistic' x = oneMinus (sqr(g x))       -- 1-(2x-1)^2
-      where g ( 1 : x) = x              -- g(x)= max(-1,2x-1)
-            g ( 0 : x) = subOne x
-            g (-1 : x) = minusOne
+logistic' x = oneMinus (sqr(g x))   -- 1-(2x-1)^2
+  where
+    g ( 1 : x) = x                  -- g(x)= max(-1,2x-1)
+    g ( 0 : x) = subOne x
+    g (-1 : x) = minusOne
 ```
 Here is an experiment, where I work with the fast one:
 
@@ -697,8 +711,9 @@ mexp x = bigMid (series one 1)
 ```haskell
 msin :: I -> I
 msin x = bigMid (series x 2)
- where x2 = compl(sqr x)
-       series y n = zero : y : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
+  where
+    x2 = compl(sqr x)
+    series y n = zero : y : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 ```
 
 ## Trigonometric function `1/2 cos(x/2)`
@@ -706,8 +721,9 @@ msin x = bigMid (series x 2)
 ```haskell
 mcos :: I -> I
 mcos x = bigMid (series one 1)
- where x2 = compl(sqr x)
-       series y n = y : zero : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
+  where
+    x2 = compl(sqr x)
+    series y n = y : zero : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 ```
 
 ## Trigonometric function `1/2 arctan(x/2)`
@@ -715,8 +731,9 @@ mcos x = bigMid (series one 1)
 ```haskell
 marctan :: I -> I
 marctan x = bigMid (series x 1)
- where x2 = compl(sqr x)
-       series y n = zero : divByInt y n : series (mul x2 y) (n+2)
+  where
+    x2 = compl(sqr x)
+    series y n = zero : divByInt y n : series (mul x2 y) (n+2)
 ```
 
 ## Number π again
@@ -747,9 +764,10 @@ example13 = let (m,x) = mulByInt piDividedBy4 4
 ```haskell
 marcsin :: I -> I
 marcsin x = bigMid (series x 1)
- where x2 = sqr x
-       series y n = zero : divByInt y n :
-                    series (tMulByInt (divByInt (mul x2 y) (n+1)) n) (n+2)
+  where
+    x2 = sqr x
+    series y n = zero : divByInt y n :
+                 series (tMulByInt (divByInt (mul x2 y) (n+1)) n) (n+2)
 ```
 
 ## Logarithmic function `ln(1+x/2)/x`
@@ -759,8 +777,9 @@ When `x = 0` we get the limit, `namely 1/2`.
 mlni :: I -> I
 
 mlni x = bigMid (series one 1)
- where x2 = compl x
-       series y n = divByInt y n : series (mul x2 y) (n+1)
+  where
+    x2 = compl x
+    series y n = divByInt y n : series (mul x2 y) (n+1)
 ```
 
 
@@ -778,7 +797,7 @@ The inverse function `1 / (2 - x)` using power series:
 ```haskell
 inv :: I -> I
 inv x = bigMid (series one)
- where series y = y : series (mul x y)
+  where series y = y : series (mul x y)
 ```
 
 ## Affine maps
@@ -815,9 +834,10 @@ See [Escardó and Simpson (2001)](https://martinescardo.github.io/papers/interva
 ```haskell
 affine :: I -> I -> I -> I
 affine a b x = bigMid (map h x)
-  where h (-1) = a
-        h   0  = mid a b
-        h   1  = b
+  where
+   h (-1) = a
+   h   0  = mid a b
+   h   1  = b
 ```
 Notice some particular cases. Multiplication is given by
 ```haskell
@@ -843,8 +863,9 @@ only. Hence we only check such sequences of digits.
 ```haskell
 findI :: (I -> Bool) -> I
 findI p = if p left then left else right
- where left  = -1 : findI(\x -> p(-1:x))
-       right =  1 : findI(\x -> p( 1:x))
+ where
+  left  = -1 : findI(\x -> p(-1:x))
+  right =  1 : findI(\x -> p( 1:x))
 
 forEveryI, forSomeI :: (I -> Bool) -> Bool
 forSomeI p = p(findI p)
@@ -861,9 +882,10 @@ findI' :: (I -> Bool) -> I
 findI' p | p(left)   = left
          | p(centre) = centre
          | otherwise = right
- where left   = -1 : findI'(\x -> p(-1:x))
-       centre =  0 : findI'(\x -> p( 0:x))
-       right  =  1 : findI'(\x -> p( 1:x))
+ where
+  left   = -1 : findI'(\x -> p(-1:x))
+  centre =  0 : findI'(\x -> p( 0:x))
+  right  =  1 : findI'(\x -> p( 1:x))
 
 forEveryI', forSomeI' :: (I -> Bool) -> Bool
 forSomeI' p = p(findI' p)
@@ -1011,9 +1033,10 @@ The following gives `True` if `x < 0`, `False` if `x > 0`, and an infinite, unpr
 ```haskell
 negative :: I -> Bool
 negative x = f(znorm x)
- where f( 0 : x) = f x
-       f(-1 : x) = True
-       f( 1 : x) = False
+ where
+  f( 0 : x) = f x
+  f(-1 : x) = True
+  f( 1 : x) = False
 ```
 This is not used anywhere else:
 ```haskell
@@ -1043,9 +1066,10 @@ case of the trichotomy law `x < a` or `a < y`, where `a=0`.
 ```haskell
 ztrichot :: I -> I -> Bool
 ztrichot x y = f (znorm x) (znorm y)
- where f (0  : x) (0 : y) = f x y
-       f (-1 : x)      y  = True
-       f       x       y  = False
+ where
+  f (0  : x) (0 : y) = f x y
+  f (-1 : x)      y  = True
+  f       x       y  = False
 ```
 Assume that `f` is strictly increasing and that `f(-1) < f(1)`.
 ```haskell
@@ -1078,9 +1102,10 @@ Perhaps counter-intuitively, the closer we get the root,
 longer the algorithm takes to produce the next digit. A related example is this:
 ```haskell
 example7 = trisection f
- where tiny n = if n == 0 then one else 0 : tiny(n-1)
-       epsilon = tiny (10^3)
-       f = affine (compl epsilon) epsilon
+ where
+  tiny n = if n == 0 then one else 0 : tiny(n-1)
+  epsilon = tiny (10^3)
+  f = affine (compl epsilon) epsilon
 ```
 If we want a root of `f` in a given interval `[a,b]`, we find the unique
 affine map `g` such that `g(-1)=a` and `g(1)=b`. We then solve `h(x)=0`, where
@@ -1088,7 +1113,7 @@ affine map `g` such that `g(-1)=a` and `g(1)=b`. We then solve `h(x)=0`, where
 ```haskell
 trisectionInterval :: I -> I -> (I -> I) -> I
 trisectionInterval a b f = g(trisection (f.g))
- where g = affine a b
+  where g = affine a b
 ```
 The particular case where `a=0` and `b=1` is often useful, and in this case
 `g(x) = 1 : x`.
@@ -1121,10 +1146,11 @@ A constructive definition is
 ```haskell
 zppif :: I -> I -> I
 zppif x y = c (znorm x) (znorm y)
-  where c (0:x) (0:y) = 0 : c x y
-        c (0:x)    y  = c x y
-        c (-1:x)   _  = zero
-        c ( 1:x)   y  = y
+  where
+    c (0:x) (0:y) = 0 : c x y
+    c (0:x)    y  = c x y
+    c (-1:x)   _  = zero
+    c ( 1:x)   y  = y
 ```
 If `x=0` and `y≠0` is close to zero, the answer is a partial number close
 to zero.
@@ -1183,28 +1209,33 @@ that there is indeed a bug, and compute the offending input.
 buggyMul (0:x) y = 0 : buggyMul x y
 buggyMul x (0:y) = 0 : buggyMul x y
 buggyMul (a0 : 0 : x) (b0 : 0 : y) = mid p q
-  where p  = 0 : mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : 0 : 0 : buggyMul x y
+  where
+    p  = 0 : mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : 0 : 0 : buggyMul x y
 buggyMul (a0 : 0 : x) (b0 : 1 : y) = mid p q
-  where p  = mid p' p''
-        p' = 0 : 0 : x
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : 0 : 0 : buggyMul x y
+  where
+    p  = mid p' p''
+    p' = 0 : 0 : x
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : 0 : 0 : buggyMul x y
 buggyMul (a0 : 0 : x) (b0 : b1 : y) = mid p q
-  where p  = mid p' p''
-        p' = (a0*b1): 0 : digitMul b1 x
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : 0 : 0 : buggyMul x y
+  where
+    p  = mid p' p''
+    p' = (a0*b1): 0 : digitMul b1 x
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : 0 : 0 : buggyMul x y
 buggyMul (a0 : a1 : x) (b0 : 0 : y) = mid p q
-  where p  = mid p' p''
-        p' = 0 : 0 : digitMul a1 y
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : (a1*b0) : 0 : buggyMul x y
+  where
+    p  = mid p' p''
+    p' = 0 : 0 : digitMul a1 y
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q = (a0*b0) : (a1*b0) : 0 : buggyMul x y
 buggyMul (a0 : a1 : x) (b0 : b1 : y) = mid p q
-  where p  = mid p' p''
-        p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
-        p''= mid (digitMul b0 x) (digitMul a0 y)
-        q = (a0*b0) : (a1*b0) : (a1*a1) : buggyMul x y
+  where
+   p  = mid p' p''
+   p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
+   p''= mid (digitMul b0 x) (digitMul a0 y)
+   q  = (a0*b0) : (a1*b0) : (a1*a1) : buggyMul x y
 ```
 How do we know it is wrong, and what is the mistake?
 
@@ -1227,8 +1258,9 @@ This evaluates to `False` (and to `True` for closeness smaller than `4`). We
 now find a counter-example:
 ```haskell
 example9 = (take 5 x, take 5 y)
- where x = findI(\x -> forSomeI(\y -> not(close 4 (mul x y) (buggyMul x y))))
-       y = findI(\y -> not(close 4 (mul x y) (buggyMul x y)))
+ where
+  x = findI(\x -> forSomeI(\y -> not(close 4 (mul x y) (buggyMul x y))))
+  y = findI(\y -> not(close 4 (mul x y) (buggyMul x y)))
 ```
 This gives `([-1,-1,-1,-1,-1],[-1,1,-1,-1,-1])` as an example for which
 `buggyMul` has a bug (assuming `mul` is correct). These two examples run
