@@ -1037,7 +1037,7 @@ constructive mathematics with a tendency to be rediscovered again and
 again).
 
 Assuming either `x < 0` or `0 < y`, we tell which one holds, where `True` is
-for `x` and `False` for `y`. Will diverge if `x=y=0`. This is a particular
+for `x` and `False` for `y`, and willl diverge if `x=y=0`. This is a particular
 case of the trichotomy law `x < a` or `a < y`, where `a=0`.
 ```haskell
 ztrichot :: I -> I -> Bool
@@ -1072,7 +1072,7 @@ squareRoot :: I -> I
 squareRoot = inverse sqr
 
 example6 = toDouble(squareRoot half)
-```haskell
+```
 Perhaps counter-intuitively, the closer we get the root, the algorithm
 takes longer to produce the next digit. A related example is this:
 ```haskell
