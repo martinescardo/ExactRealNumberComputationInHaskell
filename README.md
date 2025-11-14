@@ -393,7 +393,7 @@ signed2Decimal :: I -> Decimal
 signed2Decimal x = let (d,y) = mulByInt x 10
                    in d : signed2Decimal y
 ```
-We now get rid of negative decimal digits. Only works for positive,
+We now get rid of negative decimal digits. This only works for positive,
 non-10-adic numbers, as discussed above. We use a finite state machine
 with stages `f` and `g`, using a weak positiveness test as an
 auxiliary function:
