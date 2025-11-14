@@ -1029,7 +1029,7 @@ znorm x          = x
 See also my 1998 paper [Effective and sequential definition by cases
 on the reals via infinite signed-digit numerals](https://www.sciencedirect.com/science/article/pii/S1571066105802142).
 
-The following gives `True` if `x < 0`, `False` if `x > 0`, and an infinite, unproductive computation if `x = 0`.
+The following gives `True` if `x < 0`, `False` if `x > 0`, and an infinite, unproductive computation ("divergence") if `x = 0`.
 ```haskell
 negative :: I -> Bool
 negative x = f(znorm x)
