@@ -62,7 +62,7 @@ Hence while we read a digit `=3`, we can't figure out the first digit of
 the result.  We need a crystal ball to compute the first digit.
 
 [Continuity is violated](https://www.sciencedirect.com/science/article/pii/S1571066104051357).  Continuity says that finitely many digits of output
-the result depend only on finitely many digits of input.  To
+depend only on finitely many digits of input.  To
 regain continuity, alternative representations of real numbers are
 used (see e.g. Plume's (1997) [4th-year project report](https://www.dcs.ed.ac.uk/home/mhe/plume/)).
 
