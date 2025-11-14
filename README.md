@@ -317,9 +317,7 @@ Using [Bailey, Borwein & Plouffe 1997](https://www.davidhbailey.com/dhbpapers/di
 See also [Wikipedia](http://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula).
 ```haskell
 piDividedBy32 :: I
-piDividedBy32 =
- bigMid
-  [f k (mid (mid (g1 k) (g2 k))(mid (g3 k) (g4 k))) | k <- [0..]]
+piDividedBy32 = bigMid [f k (mid (mid (g1 k) (g2 k))(mid (g3 k) (g4 k))) | k <- [0..]]
  where f k x = if k == 0 then x else 0:0:0: f (k-1) x
        g1 k = divByInt (repeat  1)      (8*k+1)
        g2 k = divByInt (-1 : zero)      (8*k+4)
