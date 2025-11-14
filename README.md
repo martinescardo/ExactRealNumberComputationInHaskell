@@ -1136,7 +1136,7 @@ The following is a partial function defined on pairs
 ```
 that is, undefined on
 ```text
-  (0,y) with y /= 0.
+  (0,y) with y≠0.
 ```
 The classical mathematical definition is
 ```text
@@ -1165,7 +1165,7 @@ Application: we can define
   (ppif x < y then u else v) = u + if (x-y) < 0 then 0 else v-u.
 ```
 Except that `+` and `-` are not available. Hence we need a little bit
-more work.
+more work:
 ```haskell
 ppif :: I -> I -> I -> I -> I
 ppif x y u v =
@@ -1183,7 +1183,7 @@ will be (a third) representation of that number.
 
 I called this the "pseudo-parallel conditional" in [a 1998 publication](https://www.sciencedirect.com/science/article/pii/S1571066105802142).
 
-A particular case of interest is y = 0, for which we get a more
+A particular case of interest is `y=0`, for which we get a more
 efficient definition:
 ```haskell
 ppifz :: I -> I -> I -> I
@@ -1201,10 +1201,10 @@ pmax x y = ppif x y y x
 
 ## Finding bugs automatically
 
-Time to do some automatic program verification. Some years ago I
-manually introduced a bug in the multiplication algorithm, and now
+This is now time to do some automatic program verification. Some years ago I
+deliberately introduced a bug in the multiplication algorithm, and now
 truly I don't remember what it was. But we are going to be able to see
-that there is indeed a bug, and compute the offending input.
+that there is indeed a bug, and compute an offending input.
 ```haskell
 buggyMul (0:x) y = 0 : buggyMul x y
 buggyMul x (0:y) = 0 : buggyMul x y
