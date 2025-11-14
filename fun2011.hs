@@ -250,23 +250,21 @@ logisticsError = zipWith (-) logistics logisticsDouble
 example5 = logisticsError
 
 mexp :: I -> I
-mexp x = bigMid(series one 1)
-    where series y n = y : series (divByInt (mul x y) n) (n+1)
+mexp x = bigMid (series one 1)
+  where series y n = y : series (divByInt (mul x y) n) (n+1)
 
 msin :: I -> I
-msin x = bigMid(series x 2)
+msin x = bigMid (series x 2)
  where x2 = compl(sqr x)
-       series y n = zero : y :
-                    series(divByInt(mul x2 y)(n*(n+1)))(n+2)
+       series y n = zero : y : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 
 mcos :: I -> I
-mcos x = bigMid(series one 1)
+mcos x = bigMid (series one 1)
  where x2 = compl(sqr x)
-       series y n = y : zero :
-                    series(divByInt(mul x2 y)(n*(n+1)))(n+2)
+       series y n = y : zero : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 
 marctan :: I -> I
-marctan x = bigMid(series x 1)
+marctan x = bigMid (series x 1)
  where x2 = compl(sqr x)
        series y n = zero : divByInt y n :
                     series (mul x2 y) (n+2)
@@ -284,14 +282,14 @@ example13 = let (m,x) = mulByInt piDividedBy4 4
             in show m ++ "." ++ decimalString x
 
 marcsin :: I -> I
-marcsin x = bigMid(series x 1)
+marcsin x = bigMid (series x 1)
  where x2 = sqr x
        series y n = zero : divByInt y n :
                     series (tMulByInt (divByInt (mul x2 y) (n+1)) n) (n+2)
 
 mlni :: I -> I
 
-mlni x = bigMid(series one 1)
+mlni x = bigMid (series one 1)
  where x2 = compl x
        series y n = divByInt y n : series (mul x2 y) (n+1)
 
@@ -299,11 +297,11 @@ mln :: I -> I
 mln x = mul x (mlni x)
 
 inv :: I -> I
-inv x = bigMid(series one)
+inv x = bigMid (series one)
      where series y = y : series (mul x y)
 
 affine :: I -> I -> I -> I
-affine a b x = bigMid(map h x)
+affine a b x = bigMid (map h x)
   where h (-1) = a
         h   0  = mid a b
         h   1  = b
@@ -391,7 +389,7 @@ halfIntegral' f =
     else average (halfIntegral'(f.((-1):))) (halfIntegral'(f.(1:)))
 
 halfIntegral :: (I -> I) -> I
-halfIntegral f = bigMid(halfIntegral' f)
+halfIntegral f = bigMid (halfIntegral' f)
 
 znorm :: I -> I
 znorm (0:x)      = 0:znorm x

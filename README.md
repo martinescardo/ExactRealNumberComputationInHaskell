@@ -687,35 +687,33 @@ functions, we can apply the usual Taylor series from calculus.
 
 ```haskell
 mexp :: I -> I
-mexp x = bigMid(series one 1)
-    where series y n = y : series (divByInt (mul x y) n) (n+1)
+mexp x = bigMid (series one 1)
+  where series y n = y : series (divByInt (mul x y) n) (n+1)
 ```
 
 ## Trigonometric function `1/2 sin(x/2)`
 
 ```haskell
 msin :: I -> I
-msin x = bigMid(series x 2)
+msin x = bigMid (series x 2)
  where x2 = compl(sqr x)
-       series y n = zero : y :
-                    series(divByInt(mul x2 y)(n*(n+1)))(n+2)
+       series y n = zero : y : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 ```
 
 ## Trigonometric function `1/2 cos(x/2)`
 
 ```haskell
 mcos :: I -> I
-mcos x = bigMid(series one 1)
+mcos x = bigMid (series one 1)
  where x2 = compl(sqr x)
-       series y n = y : zero :
-                    series(divByInt(mul x2 y)(n*(n+1)))(n+2)
+       series y n = y : zero : series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 ```
 
 ## Function `1/2 arctan(x/2)`
 
 ```haskell
 marctan :: I -> I
-marctan x = bigMid(series x 1)
+marctan x = bigMid (series x 1)
  where x2 = compl(sqr x)
        series y n = zero : divByInt y n :
                     series (mul x2 y) (n+2)
@@ -748,7 +746,7 @@ example13 = let (m,x) = mulByInt piDividedBy4 4
 
 ```haskell
 marcsin :: I -> I
-marcsin x = bigMid(series x 1)
+marcsin x = bigMid (series x 1)
  where x2 = sqr x
        series y n = zero : divByInt y n :
                     series (tMulByInt (divByInt (mul x2 y) (n+1)) n) (n+2)
@@ -760,7 +758,7 @@ When `x = 0` we get the limit, `namely 1/2`.
 ```haskell
 mlni :: I -> I
 
-mlni x = bigMid(series one 1)
+mlni x = bigMid (series one 1)
  where x2 = compl x
        series y n = divByInt y n : series (mul x2 y) (n+1)
 ```
@@ -779,7 +777,7 @@ The inverse function 1 / (2 - x) using power series:
 
 ```haskell
 inv :: I -> I
-inv x = bigMid(series one)
+inv x = bigMid (series one)
      where series y = y : series (mul x y)
 ```
 
@@ -816,7 +814,7 @@ That is, f is a (big) midpoint homomorphism.
 See [Escardó and Simpson (2001)](https://martinescardo.github.io/papers/interval.pdf).
 ```haskell
 affine :: I -> I -> I -> I
-affine a b x = bigMid(map h x)
+affine a b x = bigMid (map h x)
   where h (-1) = a
         h   0  = mid a b
         h   1  = b
@@ -972,7 +970,7 @@ halfIntegral' f =
 Now we go back to our chosen representation:
 ```haskell
 halfIntegral :: (I -> I) -> I
-halfIntegral f = bigMid(halfIntegral' f)
+halfIntegral f = bigMid (halfIntegral' f)
 ```
 Let's integrate the absolute value function:
 
