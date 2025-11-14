@@ -561,8 +561,8 @@ We get:
 ```text
      xs = 0.934518     xd = 0.928604
 ```
-Maybe we can be confident that the correct result rounded to 2 digits
-would be $0.93$?
+Maybe we can be confident that the correct result rounded to two digits
+would be `0.93`?
 
 Let's see. Make the program print intermediate results:
 ```c
@@ -594,7 +594,7 @@ We get:
 45    0.991613      0.930892
 50    0.042174      0.625693
 55    0.108415      0.637033
-60    0.934518      0.928604
+60    0.934518      0.928604 <------ so this is a coincidence!
 ```
 We now use a different, equivalent formula:
 ```text
@@ -614,7 +614,7 @@ We now use a different, equivalent formula:
 45    0.930881    0.632135    0.975145
 50    0.625028    0.823770    0.880008
 55    0.615752    0.926760    0.898787
-60    0.315445    0.371371    0.648129
+60    0.315445    0.371371    0.648129 <-- again!
 ```
 Let's briefly discuss how the exact entry was *not* computed.
 Notice that if `a` and `x` are rational, then so is
