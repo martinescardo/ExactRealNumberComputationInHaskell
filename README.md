@@ -637,7 +637,7 @@ Notice that if `a` and `x` are rational, then so is
 So we could in principle use rational arithmetic with arbitrary
 precision for the numerators and denominators (as in Haskell).  But
 the computation of `xₙ` runs out of memory for `n > 30` or so (2Gb of
-memory).  Numerators and denominators quickly grow too large,
+memory).  Numerators and denominators quickly grow to large,
 relatively prime integers.
 
 We move back to infinite precision arithmetic in Haskell.  We consider
