@@ -221,7 +221,7 @@ It uses the auxiliary representation I4 to compute
 `bigMid' :: [I] -> [I4]`, and then converts back to `I` by division by `4`:
 ```haskell
 bigMid :: [I] -> I
-bigMid = (divideBy 4).bigMid'
+bigMid = divideBy 4 . bigMid'
  where bigMid'((a:b:x):(c:y):zs) = 2*a + b + c : bigMid'((mid x y):zs)
 ```
 Although `bigMid` cannot be defined using (*), it does satisfy (*).
@@ -254,13 +254,13 @@ subOne ( 1 : x) = -1 : x
 subOne ( 0 : x) = -1 : subOne x
 subOne (-1 : x) = minusOne
 ```
-Truncated `x ↦ 1-x` as a function `[-1,1] → [-1,1]`.
+Truncated `x ↦ 1-x` as a function `[-1,1] → [-1,1]`:
 ```haskell
 oneMinus :: I -> I
 oneMinus = addOne.compl
 ```
 Truncated multiplication by 2 as a function `[-1,1] → [-1,1]`, that is,
-`x ↦ max(-1,min(2x,1))`.
+`x ↦ max(-1,min(2x,1))`:
 ```haskell
 mulBy2 :: I -> I
 mulBy2 ( 1 : x)  = addOne x
@@ -279,13 +279,13 @@ tMulByInt x 0 = zero
 tMulByInt x 1 = x
 tMulByInt x n = if even n
                 then mulBy2(tMulByInt x (n `div` 2))
-                else add x (mulBy2(tMulByInt x (n `div` 2)))
+                else tadd x (mulBy2(tMulByInt x (n `div` 2)))
 ```
-Truncated addition as a function `[-1,1] × [-1,1] → [-1,1]``,
+Truncated addition as a function `[-1,1] × [-1,1] → [-1,1]`,
 that is, `(x,y) ↦ max(-1,min(x+y,1))`:
 ```haskell
-add :: I -> I -> I
-add x y = mulBy2(mid x y)
+tadd :: I -> I -> I
+tadd x y = mulBy2(mid x y)
 ```
 
 ## Summary so far
@@ -745,7 +745,7 @@ piDividedBy4 = let inverse n = divByInt one n
                    y2 = tMulByInt (arctan (inverse 57)) 32
                    y3 = compl(tMulByInt (arctan (inverse 239)) 5)
                    y4 = tMulByInt (arctan (inverse 110443)) 12
-               in add (add y1 y2) (add y3 y4)
+               in tadd (tadd y1 y2) (tadd y3 y4)
 
 example13 = let (m,x) = mulByInt piDividedBy4 4
             in show m ++ "." ++ decimalString x

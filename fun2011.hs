@@ -66,7 +66,7 @@ divByInt x n = f x 0
                              else  0 : f x t
 
 bigMid :: [I] -> I
-bigMid = (divideBy 4).bigMid'
+bigMid = divideBy 4 . bigMid'
  where bigMid'((a:b:x):(c:y):zs) = 2*a + b + c : bigMid'((mid x y):zs)
 
 addOne :: I -> I
@@ -95,10 +95,10 @@ tMulByInt x 0 = zero
 tMulByInt x 1 = x
 tMulByInt x n = if even n
                 then mulBy2(tMulByInt x (n `div` 2))
-                else add x (mulBy2(tMulByInt x (n `div` 2)))
+                else tadd x (mulBy2(tMulByInt x (n `div` 2)))
 
-add :: I -> I -> I
-add x y = mulBy2(mid x y)
+tadd :: I -> I -> I
+tadd x y = mulBy2(mid x y)
 
 piDividedBy32 :: I
 piDividedBy32 =
@@ -281,7 +281,7 @@ piDividedBy4 = let inverse n = divByInt one n
                    y2 = tMulByInt (arctan (inverse 57)) 32
                    y3 = compl(tMulByInt (arctan (inverse 239)) 5)
                    y4 = tMulByInt (arctan (inverse 110443)) 12
-               in add (add y1 y2) (add y3 y4)
+               in tadd (tadd y1 y2) (tadd y3 y4)
 
 example13 = let (m,x) = mulByInt piDividedBy4 4
             in show m ++ "." ++ decimalString x
