@@ -532,7 +532,7 @@ the orbit of the [logistic map](https://en.wikipedia.org/wiki/Logistic_map)
 ```text
    f(x) = ax(1-x).
 ```
-The orbit is the sequence `x₀, f(x₀), f(f(x₀)), ⋯, fⁿ(x₀), ⋯` . A
+The orbit is the sequence `x₀, f(x₀), f(f(x₀)), ⋯, fⁿ(x₀), ⋯` starting from a chosen `x₀`. A
 particularly bad case takes place when `a=4`. In this case we have a
 nice map `f:[0,1] → [0,1]` with a very nasty orbit.
 
@@ -544,7 +544,7 @@ of the lake, and 0 is extinction). Of course, this is probably not a
 very good model. The point is that, whether or not the model is good,
 it gives us computational (and indeed mathematical) trouble.
 
-Before writing Haskell code, let's what happens in `C` with float and
+Before writing Haskell code, let's see what happens in `C` with float and
 doubles:
 ```text
   void main() {
@@ -562,7 +562,7 @@ doubles:
 We get:
 ```text
      xs = 0.934518     xd = 0.928604
-```text
+```
 Maybe we can be confident that the correct result rounded to 2 digits
 would be $0.93$?
 

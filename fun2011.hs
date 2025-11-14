@@ -187,7 +187,6 @@ mul_version1 (a0 : a1 : x) (b0 : b1 : y) = mid p q
        q = (a0*b0) : (a1*b0) : (a1*b1) : mul_version1 x y
 
 mul_version2 :: I -> I -> I
-
 mul_version2 (0:x) y = 0 : mul_version2 x y
 mul_version2 x (0:y) = 0 : mul_version2 x y
 mul_version2 (a0 : 0 : x) (b0 : 0 : y) = mid p q
@@ -223,7 +222,7 @@ sqr (a0 : a1 : x) = mid p q
  where p  = mid p' p''
        p' = (a0*a1): digitMul a1 x
        p''= digitMul a0 x
-       q = (a0*a0) : (a1*a0) : (a1*a1) : sqr x
+       q  = (a0*a0) : (a1*a0) : (a1*a1) : sqr x
 
 logistic, logistic' :: I -> I
 
