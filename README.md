@@ -371,12 +371,12 @@ mulByInt x n = f n
   where
     f 1 = (0, x)
     f n = let (a,u) = f (n `div` 2)
-            d:y = u
-            b = 2*a+d
-        in if even n
-           then (b,y)
-           else let e:t = (mid x y)
-                in (b+e,t)
+              d:y = u
+              b = 2*a+d
+          in if even n
+             then (b,y)
+             else let e:t = (mid x y)
+                  in (b+e,t)
 ```
 
 ## Conversion to decimal
