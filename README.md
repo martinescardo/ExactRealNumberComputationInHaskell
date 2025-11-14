@@ -691,7 +691,7 @@ Now define
 ```
 We calculate
 ```text
-    g(x) = 1/2 sumₙ aₙ xⁿ 1/2ⁿ
+    g(x) = 1/2 Σₙ aₙ xⁿ 1/2ⁿ
          = Σₙ aₙ xⁿ 1/2ⁿ⁻¹
          = Mₙ aₙ xₙ.
 ```
