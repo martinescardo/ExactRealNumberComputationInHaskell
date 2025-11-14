@@ -555,6 +555,7 @@ doubles:
     for (int i = 0; i <= n; i++) {
          xs = a * xs * (1.0 - xs);
          xd = a * xd * (1.0 - xd);
+    }
 
     printf("xs = %f     xd = %f \n", xs, xd);
 ```
