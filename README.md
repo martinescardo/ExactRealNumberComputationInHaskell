@@ -1232,10 +1232,10 @@ buggyMul (a0 : a1 : x) (b0 : 0 : y) = mid p q
     q = (a0*b0) : (a1*b0) : 0 : buggyMul x y
 buggyMul (a0 : a1 : x) (b0 : b1 : y) = mid p q
   where
-   p  = mid p' p''
-   p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
-   p''= mid (digitMul b0 x) (digitMul a0 y)
-   q  = (a0*b0) : (a1*b0) : (a1*a1) : buggyMul x y
+    p  = mid p' p''
+    p' = (a0*b1): mid (digitMul b1 x) (digitMul a1 y)
+    p''= mid (digitMul b0 x) (digitMul a0 y)
+    q  = (a0*b0) : (a1*b0) : (a1*a1) : buggyMul x y
 ```
 How do we know it is wrong, and what is the mistake?
 
@@ -1287,5 +1287,5 @@ implementations of real numbers, using a variety of real number
 representations (and programming languages). They include, in random
 order, Norbert Muller, Branimir Lambov, Andrej Bauer, Russel O'Connor,
 Valery Menissier-Morain, Pietro di Gianantonio, Boehm & Cartwright,
-Peter Potts, David Lester, Vuilimin, and lots of people whose names
+Peter Potts, David Lester, Vuillemin, and lots of people whose names
 don't come immediately to my mind as I write this sentence.
