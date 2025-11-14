@@ -213,7 +213,7 @@ The definition
   (*) bigMid (x:xs) = mid x (bigMid xs)
 ```
 doesn't work, because `mid` needs two digits of input from each argument
-to produce one digit of output, and hence (*) cannot produce any
+to produce one digit of output, and hence `(*)` cannot produce any
 digit.
 
 We use Scriven's algorithm (in his 2008 MSc thesis ([MFPS'2009](http://dx.doi.org/10.1016/j.entcs.2008.10.020)) supervised by me).
@@ -224,7 +224,7 @@ bigMid :: [I] -> I
 bigMid = divideBy 4 . bigMid'
  where bigMid'((a:b:x):(c:y):zs) = 2*a + b + c : bigMid'((mid x y):zs)
 ```
-Although `bigMid` cannot be defined using (*), it does satisfy (*).
+Although `bigMid` cannot be defined using `(*)`, it does satisfy `(*)`.
 
 ## Truncated operations
 
