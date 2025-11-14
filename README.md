@@ -556,7 +556,6 @@ doubles:
          xs = a * xs * (1.0 - xs);
          xd = a * xd * (1.0 - xd);
 
-
     printf("xs = %f     xd = %f \n", xs, xd);
 ```
 We get:
@@ -580,7 +579,7 @@ Let's see. Make the program print intermediate results:
 ```
 We get:
 ```text
- i        xs           xd
+ i    xs            xd
 -----------------------------
  0    0.671875      0.671875
  5    0.384327      0.384327
@@ -600,7 +599,7 @@ We now use a different, equivalent formula:
 ```text
    f(x) = 4x(1-x) = 1-(2x-1)²
 
- n      exact       double 1    double 2
+ n    exact       double 1    double 2
 ----------------------------------------
  0    0.671875    0.671875    0.671875
  5    0.384327    0.384327    0.384327
@@ -617,18 +616,18 @@ We now use a different, equivalent formula:
 60    0.315445    0.371371    0.648129
 ```
 Let's briefly discuss how the exact entry was *not* computed.
-Notice that if a and x are rational, then so is
+Notice that if `a` and `x` are rational, then so is
 ```text
      f(x) = ax(1-x).
 ```
 So we could in principle use rational arithmetic with arbitrary
 precision for the numerators and denominators (as in Haskell).  But
-the computation of $xₙ$ runs out of memory for $n > 30$ or so (2Gb of
+the computation of $xₙ$ runs out of memory for `n > 30` or so (2Gb of
 memory).  Numerators and denominators quickly grow to large,
 relatively prime integers.
 
 We move back to infinite precision arithmetic in Haskell.  We consider
-a slow and a fast' way of computing the logistic map (you can also
+a slow and a fast way of computing the logistic map (you can also
 play with the several ways of defining multiplication, and I have):
 ```haskell
 logistic, logistic' :: I -> I
@@ -674,7 +673,7 @@ Consider an analytic function
 Now define
 ```text
     g(x) = 1/2 f(x/2).
-```text
+```
 We calculate
 ```text
     g(x) = 1/2 sumₙ aₙ xⁿ 1/2ⁿ
