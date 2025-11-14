@@ -332,7 +332,6 @@ findI' p | p(left)   = left
        centre =  0 : findI'(\x -> p( 0:x))
        right  =  1 : findI'(\x -> p( 1:x))
 
-
 forEveryI', forSomeI' :: (I -> Bool) -> Bool
 forSomeI' p = p(findI' p)
 forEveryI' p = not(forSomeI'(not.p))
@@ -389,6 +388,8 @@ halfIntegral' f =
 
 halfIntegral :: (I -> I) -> I
 halfIntegral f = bigMid (halfIntegral' f)
+
+example10 = halfIntegral iabs
 
 znorm :: I -> I
 znorm (0:x)      = 0:znorm x
