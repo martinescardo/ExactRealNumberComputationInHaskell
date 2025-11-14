@@ -1,12 +1,12 @@
-# Real number computation in Haskell
+# Exact real number computation in Haskell
 
 By Martin Escardo, School of Computer Science, University of Birmingham, UK, 1998-2011.
 
 Formatted to markdown 14th November 2025, with minor editions, from [the original](https://martinescardo.github.io/papers/fun2011.lhs) literate Haskell File for **Fun in the Afternoon 2011** held at the School of Computer Science, University of Birmingham, UK.
 
-The file [fun2011.hs], which contains the Haskell code below without comments, should not be edited directly. Instead edit [this](README.md) file and run
+The file [fun2011.hs](fun2011.hs), which contains the Haskell code below without comments, should not be edited directly. Instead edit [this](README.md) file and run
 ```text
- $ unhaskell mdtohs.hs < README.md > fun2011.hs
+ $ runhaskell mdtohs.hs < README.md > fun2011.hs
 ```
 to update it.
 
