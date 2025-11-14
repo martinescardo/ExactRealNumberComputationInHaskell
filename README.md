@@ -736,7 +736,7 @@ marctan x = bigMid (series x 1)
     series y n = zero : divByInt y n : series (mul x2 y) (n+2)
 ```
 
-## Number π again
+## The number π again
 
 We use [K. Takano 1982](https://en.wikipedia.org/wiki/Approximations_of_%CF%80):
 ```text
