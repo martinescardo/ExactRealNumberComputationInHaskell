@@ -765,7 +765,7 @@ mlni x = bigMid (series one 1)
 ```
 
 
-## Truncated logarithmic function `ln(1+x/2)`
+## Logarithmic function `ln(1+x/2)`
 
 ```haskell
 mln :: I -> I
