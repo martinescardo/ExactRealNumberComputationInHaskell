@@ -81,7 +81,7 @@ type I  = [Digit]
 ```
 An infinite sequence `ds = [d₀, d₁, ⋯, dₙ, ⋯]` represents the number
 ```text
-    x = d₀ / 2 + d₁ / 4 + d₂ / 8 + ⋯ + dₙ / 2ⁿ⁺¹ + ⋯
+    x = d₀/2 + d₁/4 + d₂/8 + ⋯ + dₙ/2ⁿ⁺¹ + ⋯
 ```
 Soon we will actually use a wider variety of digits, but not in the
 type `I`.
@@ -199,8 +199,8 @@ divByInt x n = f x 0
 Given a sequence `x₀, x₁, x₂, ⋯, xₙ, ⋯` of points of `[-1,1]`,
 compute
 ```text
-     Mᵢ xᵢ = x₀ / 2 + x1 / 4 + x2 / 8 + ⋯ +  xn / 2^(n+1) + ⋯
-           = Σₙ xₙ / 2ⁿ⁻¹
+     Mᵢ xᵢ = x₀/2 + x₁/4 + x₂/8 + ⋯ +  xₙ/2ⁿ⁺¹ + ⋯
+           = Σₙ xₙ/2ⁿ⁻¹
            = mid(x₀, mid(x₁, mid(x₂, ⋯)))
            = bigMid x
 ```
